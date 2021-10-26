@@ -59,6 +59,7 @@
                   </div>
                   <div class="img-with-text">
                     <canvas id="canvas"></canvas>
+                    <canvas id="zoomcanvas"></canvas>
                     <p style="text-align:center;font-size:150%;"><b>Top View</b></p>
                   </div>
                 </div>
@@ -124,6 +125,13 @@
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
 
+    //zoom canvas
+    var zoomcanvas = document.getElementById('zoomcanvas');
+    var zoom_ctx = zoomcanvas.getContext('2d');
+    zoom_ctx.canvas.width = 500;
+    zoom_ctx.canvas.height = 500;
+    document.getElementById("zoomcanvas").style="border:1px solid     #c3c3c3; position:absolute; left:1950px; top: 772px;"
+
     var imgWidth = 500;
     var imgHeight = 500;
     ctx.canvas.width = imgWidth;
@@ -155,6 +163,7 @@
         } else {
             renderQuestion(userID, question, duration);
             startTimer(duration, display, capText, userID);
+            trackMouse(duration,e);
         }
 
     }

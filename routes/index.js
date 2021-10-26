@@ -212,6 +212,8 @@ router.post('/activity/:userID/data', function(req,res,next){
     const db = client.db(datab)
     let responseCol = db.collection('responses')
 
+    console.log("GROUP 5 DATA: ");
+    console.log(group[5]);
     console.log("GROUP 4 DATA: ");
     console.log(group[4]);
     console.log("GROUP 1 DATA: ");
@@ -223,7 +225,8 @@ router.post('/activity/:userID/data', function(req,res,next){
       "q1": group[1],
       "q2": group[2],
       "q3": group[3],
-      "boundingBox": group[4]
+      "boundingBox": group[4],
+      "mouseData" : group[5]
     };
 
     if (group[1] != -2 && group[3] != -2){

@@ -1,6 +1,6 @@
 import json
 import matplotlib.pyplot as plt
-import seaborn as sns
+# import seaborn as sns
 
 #load json file
 with open('12-02-2020Test2-1.json') as f:
@@ -25,7 +25,8 @@ timeDist.sort()
 print(timeDist)
 
 x_pos = x_pos = [i for i, _ in enumerate(timeDist, 1)]
-scatter = sns.scatterplot(x = x_pos, y = timeDist)
+# scatter = sns.scatterplot(x = x_pos, y = timeDist)
+plt.scatter(x_pos, timeDist)
 plt.ylabel('Average Time Spent')
 plt.xlabel('User ID')
 plt.show()

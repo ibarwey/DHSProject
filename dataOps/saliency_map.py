@@ -32,17 +32,21 @@ mouseArray = [[ 57.2, 21, 269 ],  [ 57.2, 56, 239 ],  [ 57.1, 59, 237 ],  [ 57.1
   [ 52, 348, 314 ],   [ 52, 350, 319 ],   [ 52, 351, 326 ],   [ 51.9, 352, 336 ],
   [ 51.9, 352, 344 ], [ 51.9, 352, 352 ], [ 51.9, 352, 360 ], [ 51.9, 352, 366 ]]
 
+<<<<<<< HEAD
 def points_in_circle_np(radius, i, j):
     a = np.arange(radius + 1)
     for x, y in zip(*np.where(a[:,np.newaxis]**2 + a**2 <= radius**2)):
         yield from set(((x, y), (x, -y), (-x, y), (-x, -y),))
 
+=======
+>>>>>>> parent of d9239a3 (Revert "More updates")
 for x in range(len(mouseArray)-1):
     mousex = mouseArray[x][1]
     mousey = mouseArray[x][2]
     difference = mouseArray[x][0] - mouseArray[x+1][0]
     [a,b,c] = saliency[mousex,mousex]
 
+<<<<<<< HEAD
     saliency[mousex,mousey] = [a, b-255, c]
 
     for y in range(51):
@@ -51,6 +55,15 @@ for x in range(len(mouseArray)-1):
         saliency[mousex-y,mousey+y] = [a, b-(5*(255-y)), c]
         saliency[mousex+y,mousey+y] = [a, b-(5*(255-y)), c]
         saliency[mousex+y,mousey-y] = [a, b-(5*(255-y)), c]
+=======
+    #duplicate the data for the point if it stays in one place
+    if difference > 0:
+        for y in range(int(difference*10)):
+            saliency[mousex,mousey] = [a, b-150, c]
+    #regular case
+    else:
+        saliency[mousex,mousey] = [a, b-150, c]
+>>>>>>> parent of d9239a3 (Revert "More updates")
 
 cv2.imshow("Saliency", saliency)
 cv2.waitKey()

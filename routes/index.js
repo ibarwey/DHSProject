@@ -212,10 +212,8 @@ router.post('/activity/:userID/data', function(req,res,next){
     const db = client.db(datab)
     let responseCol = db.collection('responses')
 
-    console.log("GROUP 5 DATA: ");
-    console.log(group[5]);
-    console.log("GROUP 4 DATA: ");
-    console.log(group[4]);
+    console.log("GROUP 2 DATA: ");
+    console.log(group[2]);
     console.log("GROUP 1 DATA: ");
     console.log(group[1]);
     var item = {
@@ -223,19 +221,16 @@ router.post('/activity/:userID/data', function(req,res,next){
       "question": question,
       "time": time,
       "q1": group[1],
-      "q2": group[2],
-      "q3": group[3],
-      "boundingBox": group[4],
-      "mouseData" : group[5]
+      "q2": group[2]
     };
 
-    if (group[1] != -2 && group[3] != -2){
+    if (group[1] != -2){
 
       yield responseCol.insertOne(item);
       console.log('posted to db!')
 
     }else{
-      console.log("invalid inuput, retry")
+      console.log("invalid input, retry")
     }
 
   });
@@ -276,13 +271,11 @@ router.post('/activity/:use/:userID/data', function(req,res,next){
       "question": question,
       "time": time,
       "q1": group[1],
-      "q2": group[2],
-      "q3": group[3],
-      "boundingBox": group[4]
+      "q2": group[2]
 
     };
 
-    if (group[1] != -2 && group[3] != -2){
+    if (group[1] != -2){
 
       yield responseCol.insertOne(item);
       console.log('posted to db!')

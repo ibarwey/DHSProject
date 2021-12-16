@@ -40,21 +40,14 @@
 
         <p class="text-danger">Time remaining: <span id="time"> 00:{{ time }}</span></p>
 
-        <p>View Target Objects</p>
-        <button id="targetobjbutton"type="button" name="button">Target Objects</button>
-
-        <p><b>NOTE: Double click to enlarge images</b></p>
         <div class="container mainContainer">
-          </div>
-            <div class="row">
-                </div>
-                  <div class="img-with-text">
+                <div class="img-with-text">
                     <canvas id="canvas"></canvas>
-                    <p style="text-align:center;font-size:150%;"><b>Top View</b></p>
-                  </div>
+                </div>
 
                 <div class="col-sm answeractivity">
 
+                    <br>
                     <p>Do you see the pickaxe in the above image?</p>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary" >
@@ -66,21 +59,20 @@
                     </div>
                     <div id="popup" style="color: blue;"> </div>
 
+                    <p id="value-simple" style="visibility: hidden;"></p>
+                    <p>Please rate your confidence in your answer.</p>
+                    <div id="slider-simple"></div>
+
+                    <br>
+
                     <form id="subForm" action="/activity/{{ userID }}/" method="POST">
                         <p class="py-2 text-danger" id="errorText2"> {{ error }} </p>
                         <input type="submit" class="btn btn-outline-success" id="submitButton" value="Submit">
                     </form>
                 </div>
 
+        </div>
     </div>
-</div>
-
-<div id="myModal" class="modal">
-    <span class="close">&times;</span>
-    <button type= "button" class="rotatebutton btn btn-primary" onclick="rotateElem()"> Rotate by 90 degrees </button>
-    <br>
-    <img class="modal-content img-fluid" id="img01">
-    <div id="caption"></div>
 </div>
 
 <script>
@@ -104,11 +96,6 @@
     rect.h = null;
     var drag = false;
     var imageObj = null;
-
-
-    // Popup text when "Yes" selected
-    var yesButon = document.getElementById("option11");
-    var noButton = document.getElementById("option12");
 
     window.onload = function () {
         if (duration <= 0) {

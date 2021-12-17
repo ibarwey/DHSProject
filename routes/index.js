@@ -13,7 +13,7 @@ var datab = 'HassanExp'
 var userID = null
 let users = [];
 
-var totalQs = 24;
+var totalQs = 30;
 
 //get user instance function
 let getUserInstance = uid => users.find(user => user.id === uid);
@@ -82,7 +82,7 @@ router.post('/activity/', function(req,res,next){
 
       yield usersCol.insertOne(item);
 
-      res.render('activity', {time: 60, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
+      res.render('activity', {time: 30, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
 
     }
 
@@ -129,11 +129,11 @@ router.post('/activity/:userID/', function(req,res,next){
 
       if (currentUser.index <= totalQs){
         console.log("Q no: " + currentUser.index);
-        res.render('activity', {time: 60, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
+        res.render('activity', {time: 30, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
       }
       else{
         //change Ground Truth Array
-        var truth = [0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1] //24 in length
+        var truth = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] //30 in length
         var correct = []
 
         //get results
@@ -200,7 +200,7 @@ router.post('/activity/:userID/data', function(req,res,next){
 
   TimeLeft = group[0]
   currentUser.setPrevTime(TimeLeft)
-  time = 60 - TimeLeft
+  time = 30 - TimeLeft
 
   console.log('timeLeft  ', TimeLeft)
   console.log('time spent  ', time)
@@ -254,7 +254,7 @@ router.post('/activity/:use/:userID/data', function(req,res,next){
 
   TimeLeft = group[0]
   currentUser.setPrevTime(TimeLeft)
-  time = 60 - TimeLeft
+  time = 30 - TimeLeft
 
   console.log('timeLeft  ', TimeLeft)
   console.log('time spent  ', time)

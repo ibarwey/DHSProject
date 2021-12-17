@@ -2,9 +2,9 @@ module.exports = class User {
     constructor(id) {
         this.id = id;
         this.index = 1;
-        this.questionArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //change for q numbers
+        this.questionArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //change for q numbers
         this.currentQuestion = 0;
-        this.prevTime = 60
+        this.prevTime = 30
     }
 
     currentQ(){

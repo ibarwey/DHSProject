@@ -24,7 +24,7 @@ with open('08-05-2021Test4_3_1.json') as f:
     data = json.load(f)
 
 #specify ground truth for each question
-groundtruth = [0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1]
+groundtruth = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] #length 30
 
 
 for user in usersCol.find():
@@ -32,8 +32,6 @@ for user in usersCol.find():
     responses = [] #for all qs
     answers_q1 = [] #for q1
     answers_q2 = [] #for q2
-    answers_q3 = [] #for q3
-    answers_q4 = [] #for q4
     time = []
 
     key2pay = user["key2pay"] #surveyCode
@@ -45,7 +43,7 @@ for user in usersCol.find():
 
     print(userName + ": " + str(responseCount) + "  correct: " + str(nCorrect))
 
-    if(responseCount == 24):
+    if(responseCount == 30):
         completed_users.append(userName)
     else:
         userRemove += 1

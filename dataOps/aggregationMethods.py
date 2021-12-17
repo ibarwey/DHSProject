@@ -299,7 +299,7 @@ trap_true = [0]*48
 trap_false = [0]*48
 
 #fill values in trap_true and trap_false arrays
-for i in range(24):
+for i in range(30):
 
     predictions = []
 
@@ -325,7 +325,7 @@ whTotals = []
 eTotals = []
 
 #calculate results
-for i in range(24):
+for i in range(30):
 
     predictions = []
     confidence = []

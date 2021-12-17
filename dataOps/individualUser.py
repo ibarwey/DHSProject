@@ -19,7 +19,7 @@ percentArray = []
 dataArray = []
 fnrArray = []
 #specify ground truth for each question
-groundtruth = [0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1]
+groundtruth = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] #length 30
 
 for user in usersCol.find():
 
@@ -32,12 +32,12 @@ for user in usersCol.find():
     score = user['score']
     if(score != "None"):
         print(score)
-        percentArray.append(score*100/24)
+        percentArray.append(score*100/30)
 
     for x in userResponse:
         if(x["question"] > 11 and x["q1"] != 1):
             fnr = fnr+1
-    
+
     print(fnr)
     if(fnr>13):
         fnrArray.append(100)

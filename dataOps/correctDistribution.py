@@ -6,19 +6,19 @@ import seaborn as sns
 with open('12-02-2020Test2-1.json') as f:
     data = json.load(f)
 
-groundtruth = [1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0]
+groundtruth = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 correctDist = []
 
 #iterate through users
 for i in range(len(data)):
     correct = 0
-    for j in range(1,25):
+    for j in range(1,31):
         response = data[i][str(j)]
         useRes = response["q1"]
         if useRes == groundtruth[j-1]:
             correct += 1
-            
+
     correctDist.append(correct)
 
 correctDist.sort()

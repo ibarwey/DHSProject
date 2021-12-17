@@ -50,45 +50,34 @@ function renderQuestion(userID, sequence, duration) {
 
     var w = window.innerWidth;
 
-    var formatter = d3.format(",.2f");
-          var tickFormatter = function(d) {
-            if(d == 0){
-              return "Uncertain";
-            }
-            if(d == .30){
-              return "Slightly Confident";
-            }
-            if(d == .70){
-              return "Confident";
-            }
-            if(d == 1){
-              return "Very Confident";
-            }
-          }
+    var formatter = d3.format("");
+    var tickFormatter = function(d) {
+      return formatter(d) + "%";
+    }
 
-          let sliderWidth = d3.select('#slider-simple').node().offsetWidth
-      var data = [0, .30, .70,1];
+    let sliderWidth = d3.select('#slider-simple').node().offsetWidth
 
-      var sliderSimple = d3
-          .sliderHorizontal()
-          .min(d3.min(data))
-          .max(d3.max(data))
-          .width(sliderWidth/1.2)
-          .tickFormat(tickFormatter)
-          .ticks(9)
-          .step(.1)
-          .default(.5)
-          .on('onchange', val => {
-              d3.select('p#value-simple').text(d3.format('.0%')(val));
-          });
 
-      d3.select('div#slider-simple')
-          .append('svg')
-          .attr('width', sliderWidth)
-          .attr('height', 90)
-          .append('g')
-          .attr('transform', 'translate(30,30)')
-          .call(sliderSimple);
+var sliderSimple = d3
+    .sliderHorizontal()
+    .min(0)
+    .max(100)
+    .width(sliderWidth/1.2)
+    .tickFormat(tickFormatter)
+    .ticks(9)
+    .step(10)
+    .default(50)
+    .on('onchange', val => {
+        d3.select('p#value-simple').text(d3.format('.0%')(val));
+    });
+
+d3.select('div#slider-simple')
+    .append('svg')
+    .attr('width', sliderWidth)
+    .attr('height', 90)
+    .append('g')
+    .attr('transform', 'translate(30,30)')
+    .call(sliderSimple);
 
       d3.select('p#value-simple').text(d3.format('.0%')(sliderSimple.value()));
 

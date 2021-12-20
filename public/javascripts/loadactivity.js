@@ -23,16 +23,7 @@ function trackMouse(duration,e) {
 }
 
 function renderQuestion(userID, sequence, duration) {
-    var x = parseInt(sequence)+13;
-    console.log(sequence);
-    if(sequence > 11){
-      //console.log(sequence+13);
-      exercise_img_src = "/images/4_3_1_Z-Images/image-z_" + x + ".png";
-    }
-    else{
-      exercise_img_src = "/images/4_3_1_Z-Images/image-z_" + sequence + ".png";
-    }
-
+    exercise_img_src = "/images/5_1_1-Images/img-" + sequence + ".png";
     obj_img = "/images/objects/targetobjects.png";
 
     if (duration > 0) {

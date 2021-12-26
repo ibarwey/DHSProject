@@ -65,30 +65,25 @@ router.post('/activity/', function(req,res,next){
   co(function* () {
 
     let client = yield MongoClient.connect(url);
-    const db = client.db(datab)
+    const db = client.db(datab) //second part db
     let usersCol = db.collection('users')
-
-    check = yield usersCol.findOne({"user" : currentUser.id})
+    check1 = yield usersCol.findOne({"user" : currentUser.id})
 
     //check to see if user exists in database
-    if(check === null && currentUser.id != null){
+    if(check1 != null && currentUser.id != null){
 
-      //insert new user if user does not exist
-      var item = {
-        "user": currentUser.id,
-        "key2pay": null,
-        "surveyResults": null,
-        "score": null
-      };
+      let usersCol = db.collection('users')
+      check = yield usersCol.findOne({"user" : currentUser.id})
 
-      yield usersCol.insertOne(item);
-
-      res.render('activity', {time: 30, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
-
+      if(check === null){
+        res.render('activity', {time: 30, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
+      }
+      else{
+          res.render('index', {error: "ERROR: Cannot repeat activity"})
+      }
     }
-
     else{
-      res.render('index', {error: "ERROR: Username already exists"})
+      res.render('index', {error: "ERROR: Cannot continue without finishing part 1"})
     }
 
   });
@@ -134,7 +129,7 @@ router.post('/activity/:userID/', function(req,res,next){
       }
       else{
         //change Ground Truth Array
-        var truth = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] //30 in length
+        var truth = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] //30 in length
         var correct = []
 
         //get results

@@ -9,7 +9,8 @@ const { response } = require('express');
 var url = 'mongodb://localhost:27017/'; //for server tests
 //var url = 'mongodb://localhost:27014/'; //for local tests
 
-var datab = 'HassanExp'
+var datab2 = 'HassanExp2'
+var datab1 = 'HassanExp'
 var userID = null
 let users = [];
 
@@ -65,13 +66,14 @@ router.post('/activity/', function(req,res,next){
   co(function* () {
 
     let client = yield MongoClient.connect(url);
-    const db = client.db(datab) //second part db
-    let usersCol = db.collection('users')
-    check1 = yield usersCol.findOne({"user" : currentUser.id})
+    var db1 = client.db(datab1) //round 1 db
+    let usersCol1 = db1.collection('users')
+    check1 = yield usersCol1.findOne({"user" : currentUser.id})
 
     //check to see if user exists in database
     if(check1 != null && currentUser.id != null){
 
+      db = client.db(datab2)
       let usersCol = db.collection('users')
       check = yield usersCol.findOne({"user" : currentUser.id})
 
@@ -107,7 +109,7 @@ router.post('/activity/:userID/', function(req,res,next){
     yield snooze(1000)
 
     let client = yield MongoClient.connect(url);
-    const db = client.db(datab)
+    const db = client.db(datab1)
     let responseCol = db.collection('responses')
     let usersCol = db.collection('users')
 

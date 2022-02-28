@@ -8,9 +8,7 @@ const { response } = require('express');
 var url = 'mongodb://localhost:27017/'; //for server tests
 //var url = 'mongodb://localhost:27014/'; //for local tests
 
-var datab3 = 'HassanExp3'
-var datab2 = 'HassanExp2'
-var datab1 = 'HassanExp'
+var datab = 'InternalTest'
 var userID = null
 let users = [];
 var totalQs = 30;
@@ -50,40 +48,18 @@ router.post('/activity/', function(req,res,next){
  co(function* () {
 
    let client = yield MongoClient.connect(url);
-   var db1 = client.db(datab1) //round 1 db
-   let usersCol1 = db1.collection('users')
-   check1 = yield usersCol1.findOne({"user" : currentUser.id})
-
-   var db2 = client.db(datab2) // round 2 db
-   let usersCol2 = db2.collection('users')
-   check2 = yield usersCol2.findOne({"user" : currentUser.id})
+   var db = client.db(datab)
+   let usersCol = db.collection('users')
+   check = yield usersCol.findOne({"user" : currentUser.id})
 
    //check to see if user exists in database
-   if(check1 != null && check2 != null && currentUser.id != null){
+   if(check != null && currentUser.id != null){
 
-     db = client.db(datab3)
-     let usersCol = db.collection('users')
-     check = yield usersCol.findOne({"user" : currentUser.id})
+     res.render('activity', {time: 30, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
 
-     if(check === null){
-       //insert new user if user does not exist
-       var item = {
-         "user": currentUser.id,
-         "key2pay": null,
-         "surveyResults": null,
-         "score": null
-       };
-
-       yield usersCol.insertOne(item);
-       //continue to second part NOW
-       res.render('activity', {time: 30, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
-     }
-     else{
-         res.render('index', {error: "ERROR: Cannot repeat activity"})
-       }
     }
     else{
-      res.render('index', {error: "ERROR: Cannot continue without finishing parts 1 and 2"})
+      res.render('index', {error: "ERROR: Cannot participate"})
     }
 
   });

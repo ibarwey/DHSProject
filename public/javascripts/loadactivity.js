@@ -23,7 +23,7 @@ function trackMouse(duration,e) {
 }
 
 function renderQuestion(userID, sequence, duration) {
-    exercise_img_src = "/images/5_1_1-Images/img-" + sequence + ".png";
+    exercise_img_src = "/images/5_1_2-Images/img-" + sequence + ".png";
     obj_img = "/images/objects/targetobjects.png";
 
     if (duration > 0) {

@@ -53,10 +53,8 @@ router.post('/activity/', function(req,res,next){
    check = yield usersCol.findOne({"user" : currentUser.id})
 
    //check to see if user exists in database
-   if(check != null && currentUser.id != null){
-
-     res.render('activity', {time: 30, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
-
+   if(check.id != currentUser.id){
+      res.render('activity', {time: 30, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
     }
     else{
       res.render('index', {error: "ERROR: Cannot participate"})
@@ -91,7 +89,7 @@ router.post('/activity/:userID/', function(req,res,next){
 
 
     let client = yield MongoClient.connect(url);
-    const db = client.db(datab3)
+    const db = client.db(datab)
     let responseCol = db.collection('responses')
     let usersCol = db.collection('users')
 
@@ -218,7 +216,7 @@ console.log(group)
 
 
     let client = yield MongoClient.connect(url);
-    const db = client.db(datab3)
+    const db = client.db(datab)
     let responseCol = db.collection('responses')
 
 
@@ -288,7 +286,7 @@ router.post('/activity/:use/:userID/data', function(req,res,next){
 
 
     let client = yield MongoClient.connect(url);
-    const db = client.db(datab3)
+    const db = client.db(datab)
     let responseCol = db.collection('responses')
 
 
@@ -373,7 +371,7 @@ router.post('/survey/:user/:userID/sendSurvey', function(req,res,next){
   //storesurvey results
   co(function* () {
     let client = yield MongoClient.connect(url);
-    const db = client.db(datab3)
+    const db = client.db(datab)
     let UsersCol = db.collection('users')
 
 

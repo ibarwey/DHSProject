@@ -53,7 +53,7 @@ router.post('/activity/', function(req,res,next){
    check = yield usersCol.findOne({"user" : currentUser.id})
 
    //check to see if user exists in database
-   if(check.id != currentUser.id){
+   if(check == null){
       res.render('activity', {time: 30, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
     }
     else{

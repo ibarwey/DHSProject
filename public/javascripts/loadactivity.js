@@ -100,9 +100,12 @@ d3.select('div#slider-simple')
         if (option11.checked){
             q1[0] = 1;
         }
-        else{
-            q1[0] = 0;
-        }
+	else if(option12.checked){
+	    q1[0] = 0;
+	}
+	else{
+	    q1[0] = -2;
+	}
 
         console.log(q1)
 

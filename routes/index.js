@@ -53,7 +53,14 @@ router.post('/activity/', function(req,res,next){
    check = yield usersCol.findOne({"user" : currentUser.id})
 
    //check to see if user exists in database
-   if(check == null){
+   if(check == null && currentUser.id != null){
+	var item = {
+		          "user": currentUser.id,
+		          "key2pay": null,
+		          "surveyResults": null,
+		          "score": null
+		        };
+	   yield usersCol.insertOne(item);
       res.render('activity', {time: 30, userID: currentUser.id, question: questionNum, sequence: currentUser.index})
     }
     else{
@@ -98,10 +105,7 @@ router.post('/activity/:userID/', function(req,res,next){
 
 
     if (check == null){
-
-
       res.render('activity', {time: prevTime -1, userID: currentUser.id, question: currentUser.currentQ(), sequence: currentUser.index, error: "ERROR: Please answer all questions!"})
-
 
     }else{
 
